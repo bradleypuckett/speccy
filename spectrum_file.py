@@ -114,6 +114,9 @@ class SpectrumFileReader(object):
 
             # 40 MHz
             elif stype == 2:
+                print "Error, 40MHz not supported. Packet may be malformed."
+
+                '''
                 if pos >= len(data) - SpectrumFileReader.hdrsize - SpectrumFileReader.type2_pktsize + 1:
                     break
                 pos += SpectrumFileReader.hdrsize
@@ -168,10 +171,13 @@ class SpectrumFileReader(object):
                     pwr[subcarrier_freq] = sigval
 
                 yield (tsf, freq, (noise_l+noise_u)/2, (rssi_l+rssi_u)/2, pwr)
-
+                '''
 
             # ath10k
             elif stype == 3:
+                print "Error, ath10k not supported. Packet may be malformed."
+
+                '''
                 if pos >= len(data) - SpectrumFileReader.hdrsize - SpectrumFileReader.type3_pktsize + 1:
                     break
                 pos += SpectrumFileReader.hdrsize
@@ -184,3 +190,4 @@ class SpectrumFileReader(object):
                 sdata = struct.unpack_from("64B", data, pos)
                 pos += 64
                 yield (tsf, freq1, noise, rssi, sdata)
+                '''
